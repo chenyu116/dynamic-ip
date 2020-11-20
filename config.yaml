@@ -1,0 +1,6 @@
+providers:
+  ip138:
+    url: "http://202020.ip138.com"
+    checkInterval: 20
+common:
+  nodeName: "ubuntu"
