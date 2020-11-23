@@ -1,10 +1,13 @@
 package providers
 
 import (
+	"context"
 	"encoding/json"
 	"github.com/chenyu116/node-dynamic-ip/logger"
 	"go.uber.org/zap"
 	"io"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
 	"log"
@@ -35,13 +38,13 @@ func patch(name, ip string) error {
 			},
 		},
 	}
-	_ = clientSet
 	patchData, _ := json.Marshal(patchTemplate)
 	logger.Zap.Info("[patch]", zap.ByteString("patchData", patchData))
-	//_, err = clientSet.CoreV1().Nodes().Patch(context.Background(), name, types.StrategicMergePatchType, patchData, metav1.PatchOptions{})
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
+	_, err = clientSet.CoreV1().Nodes().Patch(context.Background(), name, types.StrategicMergePatchType, patchData, metav1.PatchOptions{})
+	if err != nil {
+		logger.Zap.Error("[patch]", zap.Error(err))
+		return err
+	}
 	return nil
 }
 
