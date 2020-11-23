@@ -20,6 +20,6 @@ func main() {
 	cf := config.GetConfig()
 
 	syncer := providers.NewSyncer()
-	syncer.Register(providers.NewIp138(providers.ProviderConfig{NodeName: cf.Common.NodeName, URL: cf.Providers.Ip138.URL, CheckInterval: cf.Providers.Ip138.CheckInterval}))
+	syncer.Register(providers.NewIPIP(providers.ProviderConfig{NodeName: cf.Common.NodeName, URL: cf.Providers.IPIP.URL, CheckInterval: cf.Providers.IPIP.CheckInterval}))
 	syncer.Start()
 }

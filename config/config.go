@@ -66,7 +66,7 @@ type ProviderConfig struct {
 }
 
 type ProvidersConfig struct {
-	Ip138 ProviderConfig `mapstructure:"ip138"`
+	IPIP ProviderConfig `mapstructure:"ipip"`
 }
 
 type Config struct {
